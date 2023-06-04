@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class BeerDto {
-    private UUID uuid;
+    private UUID id;
     private Integer version;
 
     private OffsetDateTime createdDate;
