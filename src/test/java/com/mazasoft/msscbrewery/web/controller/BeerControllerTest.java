@@ -2,9 +2,13 @@ package com.mazasoft.msscbrewery.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
+import com.mazasoft.msscbrewery.web.model.BeerStyleEnum;
+import com.mazasoft.msscbrewery.web.services.BeerService;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,9 +24,20 @@ class BeerControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @MockBean
+    BeerService beerService;
+
+    @MockBean
+    ModelMapper modelMapper;
+
     @Autowired
     ObjectMapper objectMapper;
 
+    private final BeerDto beerDto = BeerDto.builder()
+            .beerName("Test Name")
+            .beerStyle(BeerStyleEnum.LAGER)
+            .upc(122212121L)
+            .build();
     @Test
     void getBeerById() throws Exception {
         mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
@@ -31,9 +46,7 @@ class BeerControllerTest {
 
     @Test
     void saveNewBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder().build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-
         mockMvc.perform(post("/api/v1/beer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerDtoJson))
@@ -42,13 +55,10 @@ class BeerControllerTest {
 
     @Test
     void updateBeerById() throws Exception {
-        BeerDto beerDto = BeerDto.builder().build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-
         mockMvc.perform(put("/api/v1/beer/"+ UUID.randomUUID())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerDtoJson))
                 .andExpect(status().isNoContent());
-
     }
 }
