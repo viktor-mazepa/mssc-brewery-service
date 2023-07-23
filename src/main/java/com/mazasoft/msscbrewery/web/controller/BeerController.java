@@ -1,8 +1,8 @@
 package com.mazasoft.msscbrewery.web.controller;
 
 import com.mazasoft.msscbrewery.domain.Beer;
-import com.mazasoft.msscbrewery.web.services.BeerService;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
+import com.mazasoft.msscbrewery.web.services.BeerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
