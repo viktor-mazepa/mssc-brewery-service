@@ -1,9 +1,9 @@
 package com.mazasoft.msscbrewery.web.controller;
 
 import com.mazasoft.msscbrewery.domain.Beer;
+import com.mazasoft.msscbrewery.web.mappers.BeerMapper;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
 import com.mazasoft.msscbrewery.web.services.BeerService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public class BeerController {
 
     private final BeerService beerService;
 
-    private final ModelMapper modelMapper;
+    private final BeerMapper beerMapper;
 
     @Autowired
-    public BeerController(BeerService beerService, ModelMapper modelMapper) {
+    public BeerController(BeerService beerService, BeerMapper beerMapper) {
         this.beerService = beerService;
-        this.modelMapper = modelMapper;
+        this.beerMapper = beerMapper;
     }
 
     @GetMapping("/{beerId}")
@@ -36,20 +36,12 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity saveNewBeer(@RequestBody @Validated BeerDto beerDto) {
-        beerService.saveNewBeer(convertToEntity(beerDto));
+        beerService.saveNewBeer(beerMapper.convertDtoToBeer(beerDto));
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody @Validated BeerDto beerDto) {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    private Beer convertToEntity(BeerDto beerDto) {
-        return modelMapper.map(beerDto, Beer.class);
-    }
-
-    private BeerDto convertToDto(Beer beer) {
-        return modelMapper.map(beer, BeerDto.class);
     }
 }
