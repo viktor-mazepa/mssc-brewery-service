@@ -1,10 +1,10 @@
 package com.mazasoft.msscbrewery.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mazasoft.msscbrewery.services.BeerService;
 import com.mazasoft.msscbrewery.web.mappers.BeerMapper;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
 import com.mazasoft.msscbrewery.web.model.BeerStyleEnum;
-import com.mazasoft.msscbrewery.web.services.BeerService;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
