@@ -5,8 +5,6 @@ import com.mazasoft.msscbrewery.services.BeerService;
 import com.mazasoft.msscbrewery.web.mappers.BeerMapper;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
 import com.mazasoft.msscbrewery.web.model.BeerStyleEnum;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -65,7 +63,7 @@ class BeerControllerTest {
                 .beerName("Test Beer")
                 .beerStyle(BeerStyleEnum.LAGER)
                 .price(new BigDecimal("3.99"))
-                .upc(111111L)
+                .upc("00123456789012")
                 .build();
     }
 }
