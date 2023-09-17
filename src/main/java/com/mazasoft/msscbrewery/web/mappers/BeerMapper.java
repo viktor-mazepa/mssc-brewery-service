@@ -2,12 +2,16 @@ package com.mazasoft.msscbrewery.web.mappers;
 
 import com.mazasoft.msscbrewery.domain.Beer;
 import com.mazasoft.msscbrewery.web.model.BeerDto;
+import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
 @Mapper(uses = {DateMapper.class})
+@DecoratedWith(BeerMapperDecorator.class)
 public interface BeerMapper {
 
-    BeerDto convertBeerToDto(Beer beer);
+    BeerDto beerToBeerDto(Beer beer);
 
-    Beer convertDtoToBeer(BeerDto dto);
+    Beer beerDtoToBeer(BeerDto dto);
+
+    BeerDto beerToBeerDtoWithInventory(Beer beer);
 }
