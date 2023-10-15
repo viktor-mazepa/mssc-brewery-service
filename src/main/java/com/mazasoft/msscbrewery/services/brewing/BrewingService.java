@@ -1,4 +1,4 @@
-package com.mazasoft.msscbrewery.services;
+package com.mazasoft.msscbrewery.services.brewing;
 
 import com.mazasoft.msscbrewery.config.JmsConfig;
 import com.mazasoft.msscbrewery.domain.Beer;
